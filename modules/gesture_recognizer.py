@@ -48,7 +48,7 @@ class GestureRecognizer:
             (screen_x, screen_y) as integers clamped to screen bounds.
         """
         lm = landmarks[INDEX_TIP]
-        mapped_x = int((1.0 - lm.x) * screen_w)
+        mapped_x = int(lm.x * screen_w)
         mapped_y = int(lm.y * screen_h)
         mapped_x = max(0, min(screen_w - 1, mapped_x))
         mapped_y = max(0, min(screen_h - 1, mapped_y))
