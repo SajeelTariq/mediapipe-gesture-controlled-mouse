@@ -1,6 +1,12 @@
 # Pinch detection
-PINCH_THRESHOLD = 40          # px — distance to trigger pinch
-PINCH_RELEASE_THRESHOLD = 55  # px — hysteresis to prevent flapping
+PINCH_THRESHOLD = 10          # px — distance to trigger pinch (fingertips must touch)
+PINCH_RELEASE_THRESHOLD = 35  # px — hysteresis to prevent flapping
+
+# Cursor sensitivity
+# 1.0 = hand must move full frame width to cross full screen
+# 1.5 = default — small movements cover more screen real estate
+# 2.0 = very sensitive, tiny hand movements move cursor far
+CURSOR_SENSITIVITY = 5
 
 # Smoothing
 SMOOTHING_BUFFER = 5          # number of frames to average cursor position

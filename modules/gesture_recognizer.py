@@ -6,6 +6,7 @@ from typing import List, Optional, Tuple
 import numpy as np
 
 from config import (
+    CURSOR_SENSITIVITY,
     PINCH_THRESHOLD,
     PINCH_RELEASE_THRESHOLD,
     SCROLL_DEADZONE,
@@ -48,8 +49,12 @@ class GestureRecognizer:
             (screen_x, screen_y) as integers clamped to screen bounds.
         """
         lm = landmarks[INDEX_TIP]
-        mapped_x = int(lm.x * screen_w)
-        mapped_y = int(lm.y * screen_h)
+        # Scale movement around the center of the frame by CURSOR_SENSITIVITY.
+        # Values > 1.0 amplify small hand movements into larger cursor travel.
+        sx = (lm.x - 0.5) * CURSOR_SENSITIVITY + 0.5
+        sy = (lm.y - 0.5) * CURSOR_SENSITIVITY + 0.5
+        mapped_x = int(sx * screen_w)
+        mapped_y = int(sy * screen_h)
         mapped_x = max(0, min(screen_w - 1, mapped_x))
         mapped_y = max(0, min(screen_h - 1, mapped_y))
         return mapped_x, mapped_y
